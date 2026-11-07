@@ -29,11 +29,16 @@ on change** (a notification when status changes), and **Quit**.
   Command Line Tools' python3).
 - `pip3 install -r requirements.txt`
 
+> **Apple's built-in python3** (`/usr/bin/python3`, 3.9) ships with pip 21.2, which is too old to
+> find the prebuilt `pyobjc-core` wheel that `rumps` needs and fails trying to compile it. Upgrade
+> pip first: `python3 -m pip install --user --upgrade pip`.
+
 ## Install
 
 ```bash
 cd /path/to/vpn-indicator-mac
-pip3 install -r requirements.txt
+python3 -m pip install --user --upgrade pip
+python3 -m pip install --user -r requirements.txt
 chmod +x install-launchagent.sh uninstall-launchagent.sh
 ./install-launchagent.sh
 ```

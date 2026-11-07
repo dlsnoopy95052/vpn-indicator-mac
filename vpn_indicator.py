@@ -12,6 +12,7 @@ import subprocess
 import tempfile
 
 import rumps
+from AppKit import NSApplication, NSAppearance
 from PIL import Image, ImageDraw
 
 # ---------------- settings ----------------
@@ -22,6 +23,8 @@ POLL_SECONDS = 3
 VPN_IFACE_RE = re.compile(r'^(utun|tun|tap|ppp|ipsec)\d+$')
 # Address used to check which interface internet traffic leaves through (nothing is sent to it)
 PROBE_ADDRESS = '1.1.1.1'
+# Force the dropdown menu into dark mode regardless of the system appearance (False = follow system)
+DARK_THEME = True
 # ------------------------------------------
 
 COLORS = {
@@ -137,4 +140,7 @@ class VpnIndicatorApp(rumps.App):
 
 
 if __name__ == '__main__':
+    if DARK_THEME:
+        NSApplication.sharedApplication().setAppearance_(
+            NSAppearance.appearanceNamed_('NSAppearanceNameDarkAqua'))
     VpnIndicatorApp().run()
